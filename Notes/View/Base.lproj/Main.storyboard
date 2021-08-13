@@ -11,7 +11,7 @@
         <!--Folders-->
         <scene sceneID="llz-AM-5BJ">
             <objects>
-                <tableViewController id="89I-TD-QQN" sceneMemberID="viewController">
+                <tableViewController id="89I-TD-QQN" customClass="FolderViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3ph-dT-Y43">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,17 +33,17 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Folders" id="R7q-4H-OE3"/>
                     <connections>
-                        <segue destination="5rg-GK-EjI" kind="show" id="Mch-Gw-VZl"/>
+                        <segue destination="5rg-GK-EjI" kind="show" identifier="folderToText" id="Mch-Gw-VZl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hj6-f8-Jaj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="968.11594202898561" y="53.571428571428569"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Text View Controller-->
         <scene sceneID="JNP-h6-aAc">
             <objects>
-                <collectionViewController id="5rg-GK-EjI" sceneMemberID="viewController">
+                <collectionViewController id="5rg-GK-EjI" customClass="TextViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="O5O-Y2-qJQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
