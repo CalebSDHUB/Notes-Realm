@@ -5,17 +5,17 @@
 //  Created by Caleb Danielsen on 13/08/2021.
 //
 // Task:
-// 1. add components to the Folders hardcoded.
 // 2. add components to the Notes hardcoded.
-// 3. add components to the Folders by button and an alert controller
 // 4. add components to the Notes by button and an alert controller
 //
 
 import UIKit
 
+// FolderViewController is responsible for adding new folders to the main screen and directing user to selected folder.
+
 class FolderViewController: UITableViewController {
     
-    let folders = ["Personal", "Work", "Hoppy"]
+    var folders: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +23,13 @@ class FolderViewController: UITableViewController {
         
     }
     
+    // This tableView( ... numberOfRowsInSection) and tableView( ... cellForRowAt) is responsible for updating the TableView with the attach array and selected cell.
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         folders.count
     }
+    
+    // Read the comment for the function just above.
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "folderCell", for: indexPath)
@@ -35,9 +39,13 @@ class FolderViewController: UITableViewController {
         return cell
     }
     
+    // Directs the user to the next screen.
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "folderToText", sender: self)
     }
+    
+    // Prepare data before the user is being directed by segue.
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueDestination = segue.destination as! NoteViewController
@@ -48,7 +56,25 @@ class FolderViewController: UITableViewController {
 
         }
     }
-
-
+    
+    // Add a new folder to the repository.
+    
+    @IBAction func addFolder(_ sender: UIBarButtonItem) {
+        
+        var folderName = UITextField()
+        
+        let ac = UIAlertController(title: "Add Folder", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Ok", style: .default) { [self] _ in
+            folders.append(folderName.text!)
+            tableView.reloadData()
+        })
+        ac.addTextField { (textInput) in
+            folderName = textInput
+            textInput.placeholder = "Folder name"
+        }
+        
+        present(ac, animated: true)
+    }
+    
 }
 

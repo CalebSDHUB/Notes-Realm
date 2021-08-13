@@ -31,7 +31,13 @@
                             <outlet property="delegate" destination="89I-TD-QQN" id="FpS-08-zlQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Folders" id="R7q-4H-OE3"/>
+                    <navigationItem key="navigationItem" title="Folders" id="R7q-4H-OE3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="iNp-it-0c2">
+                            <connections>
+                                <action selector="addFolder:" destination="89I-TD-QQN" id="7Qq-M7-gB7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="5rg-GK-EjI" kind="show" identifier="folderToText" id="Mch-Gw-VZl"/>
                     </connections>
