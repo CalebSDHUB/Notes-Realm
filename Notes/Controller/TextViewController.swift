@@ -17,6 +17,4 @@ class TextViewController: UIViewController {
         super.viewDidLoad()
         text.becomeFirstResponder()
     }
-    
-    
 }
