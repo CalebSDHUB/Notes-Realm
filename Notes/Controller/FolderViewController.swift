@@ -20,6 +20,7 @@ class FolderViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        title = "Folders"
         
     }
     
@@ -32,7 +33,7 @@ class FolderViewController: UITableViewController {
     // Read the comment for the function just above.
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "folderCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.folderCellIdentifier, for: indexPath)
         
         cell.textLabel?.text = folders[indexPath.row]
         
@@ -42,7 +43,7 @@ class FolderViewController: UITableViewController {
     // Directs the user to the next screen.
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "folderToText", sender: self)
+        performSegue(withIdentifier: Constants.folderSegueIdentifier, sender: self)
     }
     
     // Prepare data before the user is being directed by segue.

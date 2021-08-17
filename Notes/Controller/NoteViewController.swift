@@ -7,20 +7,23 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class NoteViewController: UICollectionViewController {
     
     var selectedFolder: String?
+    
+    var notes = [UITextView]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Notes"
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        test()
+        
+        print(notes.count)
 
         // Do any additional setup after loading the view.
     }
@@ -37,22 +40,31 @@ class NoteViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+//    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 0
+//    }
+    
+    func test() {
+        
+        let text = UITextView()
+        text.text = "Happy"
+        
+        for _ in 0..<10 {
+            notes.append(text)
+        }
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        notes.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.noteCellIdentifier, for: indexPath) as? NoteCell else { fatalError("Unable to deque PersonCell") }
     
-        // Configure the cell
-    
+//        cell.cellLabel?.text = "Winner"
+        
         return cell
     }
 
