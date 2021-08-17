@@ -11,7 +11,7 @@ class TextViewController: UIViewController {
 
     @IBOutlet var text: UITextView!
     
-    var selectedFolder: UITextView?
+    var selectedNote: UITextView?
     
     override func viewDidLoad() {
         super.viewDidLoad()

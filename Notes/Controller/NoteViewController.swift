@@ -23,7 +23,7 @@ class NoteViewController: UICollectionViewController {
         
         title = "Notes"
         
-        test()
+//        test()
     }
     
     func test() {
@@ -32,13 +32,22 @@ class NoteViewController: UICollectionViewController {
             notes.append(UITextView())
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
 
+    @IBAction func addNote(_ sender: UIBarButtonItem) {
+        notes.append(UITextView())
+        performSegue(withIdentifier: Constants.noteSegueIdentifier, sender: self)
+    }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         notes.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.noteCellIdentifier, for: indexPath) as? NoteCell else { fatalError("Unable to deque PersonCell") }
+        cell.backgroundColor = .blue
         return cell
     }
 
@@ -51,10 +60,14 @@ class NoteViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         let segueDestination = segue.destination as! TextViewController
-
+        
+        // If the IB Button is used the indexPath is empty because no reference is chosen.
         if let indexPath = collectionView.indexPathsForSelectedItems {
-
-            segueDestination.selectedFolder = notes[indexPath[0].item]
+            if indexPath.isEmpty {
+                segueDestination.selectedNote = notes.first
+            } else {
+                segueDestination.selectedNote = notes[indexPath.first!.item]
+            }
         }
     }
 }

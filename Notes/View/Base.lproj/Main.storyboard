@@ -90,7 +90,13 @@
                             <outlet property="delegate" destination="5rg-GK-EjI" id="ctI-U4-dXO"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Notes" id="lhe-SX-X83"/>
+                    <navigationItem key="navigationItem" title="Notes" id="lhe-SX-X83">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jYO-yy-geQ">
+                            <connections>
+                                <action selector="addNote:" destination="5rg-GK-EjI" id="6q5-1W-68M"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="Efy-HK-A21" kind="show" identifier="NotesToText" id="s0H-rK-O5c"/>
                     </connections>
