@@ -9,6 +9,7 @@ import Foundation
 
 struct Constants {
     static let folderCellIdentifier = "folderCell"
-    static let folderSegueIdentifier = "folderToText"
+    static let folderSegueIdentifier = "foldersToNotes"
     static let noteCellIdentifier = "noteCell"
+    static let noteSegueIdentifier = "NotesToText"
 }

@@ -54,7 +54,6 @@ class FolderViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
 
             segueDestination.selectedFolder = folders[indexPath.row]
-
         }
     }
     

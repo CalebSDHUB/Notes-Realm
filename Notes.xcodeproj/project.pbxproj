@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C02F48126CAB0440090A66C /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C02F48026CAB0440090A66C /* Note.swift */; };
 		3C02F48426CAB1D50090A66C /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C02F48326CAB1D50090A66C /* NoteCell.swift */; };
+		3C02F48726CBBDC60090A66C /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C02F48626CBBDC50090A66C /* TextViewController.swift */; };
 		3C44E0FD26C6EC6E00D57F38 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C44E0FC26C6EC6E00D57F38 /* Constants.swift */; };
 		3C67201B26C693C5007E17F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67201A26C693C5007E17F5 /* AppDelegate.swift */; };
 		3C67201D26C693C5007E17F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67201C26C693C5007E17F5 /* SceneDelegate.swift */; };
@@ -21,8 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3C02F48026CAB0440090A66C /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		3C02F48326CAB1D50090A66C /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		3C02F48626CBBDC50090A66C /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		3C44E0FC26C6EC6E00D57F38 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3C67201726C693C5007E17F5 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C67201A26C693C5007E17F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +90,7 @@
 			children = (
 				3C67201E26C693C5007E17F5 /* FolderViewController.swift */,
 				3C67204626C6C4C4007E17F5 /* NoteViewController.swift */,
+				3C02F48626CBBDC50090A66C /* TextViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -108,7 +109,6 @@
 			children = (
 				3C67202326C693C5007E17F5 /* Notes.xcdatamodeld */,
 				3C44E0FC26C6EC6E00D57F38 /* Constants.swift */,
-				3C02F48026CAB0440090A66C /* Note.swift */,
 				3C02F48326CAB1D50090A66C /* NoteCell.swift */,
 			);
 			path = Model;
@@ -194,9 +194,9 @@
 			files = (
 				3C67204726C6C4C4007E17F5 /* NoteViewController.swift in Sources */,
 				3C67201F26C693C5007E17F5 /* FolderViewController.swift in Sources */,
-				3C02F48126CAB0440090A66C /* Note.swift in Sources */,
 				3C67201B26C693C5007E17F5 /* AppDelegate.swift in Sources */,
 				3C44E0FD26C6EC6E00D57F38 /* Constants.swift in Sources */,
+				3C02F48726CBBDC60090A66C /* TextViewController.swift in Sources */,
 				3C67201D26C693C5007E17F5 /* SceneDelegate.swift in Sources */,
 				3C67202526C693C5007E17F5 /* Notes.xcdatamodeld in Sources */,
 				3C02F48426CAB1D50090A66C /* NoteCell.swift in Sources */,

@@ -40,7 +40,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="5rg-GK-EjI" kind="show" identifier="folderToText" id="Mch-Gw-VZl"/>
+                        <segue destination="5rg-GK-EjI" kind="show" identifier="foldersToNotes" id="Mch-Gw-VZl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hj6-f8-Jaj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -92,17 +92,17 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="Notes" id="lhe-SX-X83"/>
                     <connections>
-                        <segue destination="Efy-HK-A21" kind="show" id="s0H-rK-O5c"/>
+                        <segue destination="Efy-HK-A21" kind="show" identifier="NotesToText" id="s0H-rK-O5c"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nPz-Z8-Bio" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1789.8550724637682" y="53.571428571428569"/>
         </scene>
-        <!--View Controller-->
+        <!--Text View Controller-->
         <scene sceneID="Iur-4T-AxK">
             <objects>
-                <viewController id="Efy-HK-A21" sceneMemberID="viewController">
+                <viewController id="Efy-HK-A21" customClass="TextViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xYx-FQ-6Uj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,6 +125,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0xy-Ov-kkM"/>
+                    <connections>
+                        <outlet property="text" destination="aW4-Is-rGL" id="6lX-ke-gMu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G21-0c-2Dy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
