@@ -23,14 +23,6 @@ class NoteViewController: UICollectionViewController {
         
         title = "Notes"
         
-//        test()
-    }
-    
-    func test() {
-        
-        for _ in 0..<10 {
-            notes.append(UITextView())
-        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
