@@ -64,6 +64,7 @@ class FolderViewController: UITableViewController {
         var folderName = UITextField()
         
         let ac = UIAlertController(title: "Add Folder", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Ok", style: .default) { [self] _ in
             folders.append(folderName.text!)
             tableView.reloadData()

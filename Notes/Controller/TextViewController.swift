@@ -15,5 +15,21 @@ class TextViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        text.delegate = self
+        
+        text.textColor = .placeholderText
+        text.becomeFirstResponder()
     }
+    
+    
+}
+
+extension TextViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        text.text = ""
+        
+    }
+    
 }
