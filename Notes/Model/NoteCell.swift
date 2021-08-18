@@ -9,5 +9,5 @@ import UIKit
 
 class NoteCell: UICollectionViewCell {
     
-    @IBOutlet var text: UITextView!
+    @IBOutlet var textView: UITextView!
 }

@@ -6,15 +6,34 @@
 //
 
 import UIKit
+import CoreData
 
 class TextViewController: UIViewController {
 
-    @IBOutlet var text: UITextView!
+    @IBOutlet var textView: UITextView!
     
-    var selectedNote: UITextView?
+    var selectedNote: Note?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        text.becomeFirstResponder()
+        
+        
+        textView.becomeFirstResponder()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard var text = selectedNote?.text else { fatalError("Error: Note empty") }
+        text = textView.text
+        print("Prepare works!")
     }
 }
+
+
