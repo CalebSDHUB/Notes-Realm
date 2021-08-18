@@ -129,7 +129,13 @@
                             <constraint firstItem="aW4-Is-rGL" firstAttribute="top" secondItem="blP-Ba-71N" secondAttribute="top" id="uKs-Vc-TbV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="0xy-Ov-kkM"/>
+                    <navigationItem key="navigationItem" id="0xy-Ov-kkM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="jZb-3h-gTN">
+                            <connections>
+                                <action selector="trash:" destination="Efy-HK-A21" id="ZFN-AH-wVe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="textView" destination="aW4-Is-rGL" id="6lX-ke-gMu"/>
                     </connections>

@@ -5,11 +5,12 @@
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="parentFolder" inverseEntity="Note"/>
     </entity>
     <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <relationship name="parentFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="notes" inverseEntity="Folder"/>
     </entity>
     <elements>
         <element name="Folder" positionX="-3532.37890625" positionY="-219.0703125" width="128" height="73"/>
-        <element name="Note" positionX="-3344.390625" positionY="-218.85546875" width="128" height="73"/>
+        <element name="Note" positionX="-3344.390625" positionY="-218.85546875" width="128" height="88"/>
     </elements>
 </model>

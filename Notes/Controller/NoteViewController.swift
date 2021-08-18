@@ -17,7 +17,7 @@ class NoteViewController: UICollectionViewController {
     
     var notes = [Note]()
     
-    var index = 0
+    var index: Int = 0
     
     // Will be invoked when the Category is being initiated. So the value is stored ASAP.
     var selectedFolder: Folder? {
@@ -28,6 +28,13 @@ class NoteViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        title = ""
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         title = selectedFolder?.name
     }
     
@@ -61,12 +68,10 @@ class NoteViewController: UICollectionViewController {
         // If the IB add Button is used, the indexPath is empty because there is no indexPath.
         if let indexPath = collectionView.indexPathsForSelectedItems {
             if indexPath.isEmpty {
-                segueDestination.selectedNote = notes.first
-                segueDestination.isNewText = true
+                segueDestination.isNew = true
             } else {
                 index = indexPath.first!.item
-                segueDestination.selectedNote = notes[index]
-                segueDestination.isNewText = false
+                segueDestination.isNew = false
             }
         }
         segueDestination.delegate = self
@@ -89,7 +94,7 @@ class NoteViewController: UICollectionViewController {
 
         request.predicate = NSPredicate(format: "parentFolder.name MATCHES %@", selectedFolder!.name!)
         
-//        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         
         do {
             notes = try Constants.context.fetch(request)
@@ -101,18 +106,29 @@ class NoteViewController: UICollectionViewController {
 
 extension NoteViewController: Task {
     
-    // Adding test to CoreData and saving it.
-    func addText(text: String) {
+    // Adding text to CoreData and saving it.
+    func createText(text: String) {
         let newNote = Note(context: Constants.context)
         newNote.parentFolder = selectedFolder
         newNote.text = text
+        newNote.date = Date()
         notes.append(newNote)
         saveItems()
     }
     
-    // Updating test to CoreData and saving it.
+    // Updating text to CoreData and saving it.
     func updateText(text: String) {
         notes[index].text = text
+        saveItems()
+    }
+    
+    // Reading test and return it.
+    func readText() -> String { notes[index].text!}
+    
+    // Deleting text to CoreData and saving it.
+    func deleteText() {
+        Constants.context.delete(notes[index])
+        notes.remove(at: index)
         saveItems()
     }
 }
