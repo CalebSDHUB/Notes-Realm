@@ -12,10 +12,15 @@ class TextViewController: UIViewController {
 
     @IBOutlet var textView: UITextView!
     
+    var isNewText = false
+    
     var selectedNote: Note?
+    
+    var delegate: Task?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        textView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -26,12 +31,15 @@ class TextViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard var text = selectedNote?.text else { fatalError("Error: Note empty") }
-        text = textView.text
-        print("Prepare works!")
-    }
+}
+
+extension TextViewController: UITextViewDelegate{
+    func textViewDidEndEditing(_ textView: UITextView) { isNewText ? delegate?.addText(text: textView.text) : delegate?.updateText(text: textView.text) }
+}
+
+protocol Task {
+    func addText(text: String)
+    func updateText(text: String)
 }
 
 

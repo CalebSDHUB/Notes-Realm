@@ -17,6 +17,8 @@ class NoteViewController: UICollectionViewController {
     
     var notes = [Note]()
     
+    var index = 0
+    
     // Will be invoked when the Category is being initiated. So the value is stored ASAP.
     var selectedFolder: Folder? {
         didSet {
@@ -29,28 +31,19 @@ class NoteViewController: UICollectionViewController {
         title = selectedFolder?.name
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        collectionView.reloadData()
-    }
+    override func viewDidDisappear(_ animated: Bool) { collectionView.reloadData() }
 
-    @IBAction func addNote(_ sender: UIBarButtonItem) {
-        
-        let newNote = Note(context: Constants.context)
-        newNote.parentFolder = selectedFolder
-        notes.append(newNote)
-        saveItems()
-        performSegue(withIdentifier: Constants.noteSegueIdentifier, sender: self)
-        
-    }
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        notes.count
-    }
+    @IBAction func addNote(_ sender: UIBarButtonItem) { performSegue(withIdentifier: Constants.noteSegueIdentifier, sender: self) }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { notes.count }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.noteCellIdentifier, for: indexPath) as? NoteCell else { fatalError("Unable to deque PersonCell") }
         
         cell.backgroundColor = .blue
+        
+        cell.textView.text = notes[indexPath.item].text
         
         return cell
     }
@@ -65,14 +58,18 @@ class NoteViewController: UICollectionViewController {
 
         let segueDestination = segue.destination as! TextViewController
         
-        // If the IB Button is used the indexPath is empty because no reference is chosen.
+        // If the IB add Button is used, the indexPath is empty because there is no indexPath.
         if let indexPath = collectionView.indexPathsForSelectedItems {
             if indexPath.isEmpty {
                 segueDestination.selectedNote = notes.first
+                segueDestination.isNewText = true
             } else {
-                segueDestination.selectedNote = notes[indexPath.first!.item]
+                index = indexPath.first!.item
+                segueDestination.selectedNote = notes[index]
+                segueDestination.isNewText = false
             }
         }
+        segueDestination.delegate = self
     }
     
     func saveItems() {
@@ -99,8 +96,23 @@ class NoteViewController: UICollectionViewController {
         } catch {
             print("Error fetching data from context \(error)")
         }
+    }
+}
 
+extension NoteViewController: Task {
+    
+    // Adding test to CoreData and saving it.
+    func addText(text: String) {
+        let newNote = Note(context: Constants.context)
+        newNote.parentFolder = selectedFolder
+        newNote.text = text
+        notes.append(newNote)
+        saveItems()
     }
     
-    
+    // Updating test to CoreData and saving it.
+    func updateText(text: String) {
+        notes[index].text = text
+        saveItems()
+    }
 }
