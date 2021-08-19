@@ -47,9 +47,7 @@ class NoteViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.noteCellIdentifier, for: indexPath) as? NoteCell else { fatalError("Unable to deque PersonCell") }
-        
-        cell.backgroundColor = .blue
-        
+
         cell.textView.text = notes[indexPath.item].text
         
         return cell
