@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 
 class TextViewController: UIViewController {
 
@@ -25,7 +24,6 @@ class TextViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if !isNew {
             textView.text = delegate?.readText()
-            
         } else {
             navigationItem.rightBarButtonItem = nil
         }
@@ -46,7 +44,7 @@ class TextViewController: UIViewController {
 
 // This is really just three "if" conditions compressed into one single nested ternary operation.
 extension TextViewController: UITextViewDelegate {
-    func textViewDidEndEditing(_ textView: UITextView) { isDeleting ? isDeleting = false : ( isNew ? ( textView.text.isEmpty ? print() : delegate?.createText(text: textView.text) ) : delegate?.updateText(text: textView.text) ) }
+    func textViewDidEndEditing(_ textView: UITextView) { isDeleting ? isDeleting = false : ( isNew ? ( textView.text.isEmpty ? () : delegate?.createText(text: textView.text) ) : delegate?.updateText(text: textView.text) ) }
 }
 
 protocol Task {

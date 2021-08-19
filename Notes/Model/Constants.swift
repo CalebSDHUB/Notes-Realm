@@ -6,12 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
 struct Constants {
     static let folderCellIdentifier = "folderCell"
     static let folderSegueIdentifier = "foldersToNotes"
     static let noteCellIdentifier = "noteCell"
     static let noteSegueIdentifier = "NotesToText"
-    
-    static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 }

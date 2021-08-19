@@ -11,11 +11,13 @@
 // 2. Multi touch is disabled
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class NoteViewController: UICollectionViewController {
     
-    var notes = [Note]()
+    let realm = try! Realm()
+    
+    var resultNotes: Results<Note>!
     
     var index: Int = 0
     
@@ -42,13 +44,13 @@ class NoteViewController: UICollectionViewController {
 
     @IBAction func addNote(_ sender: UIBarButtonItem) { performSegue(withIdentifier: Constants.noteSegueIdentifier, sender: self) }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { notes.count }
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { resultNotes.count }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.noteCellIdentifier, for: indexPath) as? NoteCell else { fatalError("Unable to deque PersonCell") }
 
-        cell.textView.text = notes[indexPath.item].text
+        cell.textView.text = resultNotes[indexPath.item].text
         
         return cell
     }
@@ -74,59 +76,58 @@ class NoteViewController: UICollectionViewController {
         }
         segueDestination.delegate = self
     }
-    
-    func saveItems() {
-
-        do {
-            try Constants.context.save()
-        } catch {
-            print("Error saving context: \(error)")
-        }
-
-        collectionView.reloadData()
-    }
 
     func loadItems() {
-        
-        let request: NSFetchRequest<Note> = Note.fetchRequest()
-
-        request.predicate = NSPredicate(format: "parentFolder.name MATCHES %@", selectedFolder!.name!)
-        
-        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        
-        do {
-            notes = try Constants.context.fetch(request)
-        } catch {
-            print("Error fetching data from context \(error)")
-        }
+        resultNotes = selectedFolder?.notes.sorted(byKeyPath: "date", ascending: true)
+        collectionView.reloadData()
     }
 }
 
 extension NoteViewController: Task {
-    
+
     // Adding text to CoreData and saving it.
     func createText(text: String) {
-        let newNote = Note(context: Constants.context)
-        newNote.parentFolder = selectedFolder
-        newNote.text = text
-        newNote.date = Date()
-        notes.append(newNote)
-        saveItems()
+        
+        if let currentCategory = selectedFolder {
+            do {
+                try realm.write {
+                    let newNote = Note()
+                    newNote.text = text
+                    newNote.date = Date()
+                    currentCategory.notes.append(newNote)
+                }
+            } catch {
+                print("Error saving a new note: \(error)")
+            }
+        }
+        collectionView.reloadData()
     }
-    
+
     // Updating text to CoreData and saving it.
     func updateText(text: String) {
-        notes[index].text = text
-        saveItems()
+        
+        do {
+            try realm.write {
+                resultNotes[index].text = text
+            }
+        } catch {
+            print("Error updating a new note: \(error)")
+        }
+        collectionView.reloadData()
     }
-    
+
     // Reading test and return it.
-    func readText() -> String { notes[index].text!}
-    
+    func readText() -> String { resultNotes[index].text!}
+
     // Deleting text to CoreData and saving it.
     func deleteText() {
-        Constants.context.delete(notes[index])
-        notes.remove(at: index)
-        saveItems()
+        do {
+            try realm.write {
+                realm.delete(resultNotes[index])
+            }
+        } catch {
+            print("Error updating a new note: \(error)")
+        }
+        collectionView.reloadData()
     }
 }
